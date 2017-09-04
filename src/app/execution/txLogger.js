@@ -133,7 +133,7 @@ function renderKnownTransaction (self, data) {
       tx.removeChild(table)
     } else {
       table = createTable({
-        from, to, val: data.tx.value, input: data.tx.input, hash: data.tx.hash
+        from, to, val: data.tx.value, input: data.tx.input, hash: data.tx.hash, gas: data.tx.gas
       })
       tx.appendChild(table)
     }
@@ -165,7 +165,7 @@ function renderUnknownTransaction (self, data) {
       tx.removeChild(table)
     } else {
       table = createTable({
-        from, to, val: data.tx.value, input: data.tx.input, hash: data.tx.hash
+        from, to, val: data.tx.value, input: data.tx.input, hash: data.tx.hash, gas: data.tx.gas
       })
       tx.appendChild(table)
     }
@@ -219,6 +219,7 @@ function createTable (opts) {
   var val = opts.val
   var input = opts.input
   var hash = opts.hash
+  var gas = opts.gas
   return yo`
   <table class="${css.txTable}" id="txTable">
     <tr class="${css.tr}">
@@ -235,11 +236,15 @@ function createTable (opts) {
     </tr class="${css.tr}">
     <tr class="${css.tr}">
       <td class="${css.td}">data:</td>
-      <td class="${css.td}">${helper.shortenHexData(input)}</td>
+      <td class="${css.td}">${input}</td>
     </tr class="${css.tr}">
     <tr class="${css.tr}">
       <td class="${css.td}">hash:</td>
-      <td class="${css.td}">${helper.shortenHexData((hash))}</td>
+      <td class="${css.td}">${hash}</td>
+    </tr class="${css.tr}">
+    <tr class="${css.tr}">
+      <td class="${css.td}">gas:</td>
+      <td class="${css.td}">${gas}</td>
     </tr class="${css.tr}">
   </table>
   `
